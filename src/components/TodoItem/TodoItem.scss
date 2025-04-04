@@ -1,0 +1,10 @@
+
+.task-text.done {
+    font-style: italic;
+    text-decoration: line-through;
+    color: #ccc;
+}
+
+.task-input__editing:focus{
+    box-shadow: none !important;
+}
