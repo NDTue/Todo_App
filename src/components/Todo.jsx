@@ -67,52 +67,55 @@ function Todo() {
     });
 
     return (
-        <div className='container mt-5'>
-            <h1 className='text-primary text-decoration-underline text-center'>My Todo-s</h1>
+        <div className='container-fluid container-md mt-5'>
+            <div className='row justify-content-center'>
+                <div className='col-12 col-md-10 col-lg-8'>
+                    <h1 className='text-primary text-decoration-underline text-center mb-4'>My Todo-s</h1>
 
-            <div className='todo-container mt-5'>
-                <form className='d-flex rounded mb-4 bg-white justify-content-between align-items-center shadow'>
-                    <div className='w-100 rounded bg-light p-3 d-flex'>
-                        <input id='todo-input'
-                            className='fs-5 border-0 flex-grow-1 px-3 py-2'
-                            type="text"
-                            placeholder='New task...'
-                            value={job}
-                            onChange={(e) => setJob(e.target.value)}
-                            onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                    <div className='todo-container'>
+                        <form className='d-flex rounded mb-4 bg-white justify-content-between align-items-center shadow flex-column flex-sm-row p-2'>
+                            <div className='w-100 rounded bg-light p-2 d-flex flex-column flex-sm-row mb-2 mb-sm-0'>
+                                <input id='todo-input'
+                                    className='fs-5 border-0 flex-grow-1 px-3 py-2'
+                                    type="text"
+                                    placeholder='New task...'
+                                    value={job}
+                                    onChange={(e) => setJob(e.target.value)}
+                                    onKeyUp={(e) => e.key === 'Enter' && handleSubmit()}
+                                />
+                                <button type="button" className='btn btn-primary ms-0 ms-sm-3 mt-2 mt-sm-0 btn-lg' onClick={handleSubmit}>
+                                    ADD
+                                </button>
+                            </div>
+                        </form>
+
+                        {/* Filter Buttons */}
+                        <div className="btn-group d-flex flex-wrap mb-4">
+                            <button className={`btn btn-${filter === 'ALL' ? 'primary' : 'outline-primary'} flex-grow-1`} 
+                                onClick={() => setFilter('ALL')}
+                            >
+                                ALL
+                            </button>
+                            <button className={`btn btn-${filter === 'active' ? 'primary' : 'outline-primary'} flex-grow-1`} 
+                                onClick={() => setFilter('active')}
+                            >
+                                ACTIVE
+                            </button>
+                            <button className={`btn btn-${filter === 'completed' ? 'primary' : 'outline-primary'} flex-grow-1`} 
+                                onClick={() => setFilter('completed')}
+                            >
+                                COMPLETED
+                            </button>
+                        </div>
+
+                        <TodoList
+                            tasks={filteredTasks}
+                            onUpdate={handleUpdate}
+                            onRemove={handleRemove}
+                            onToggleStatus={handleToggleStatus}
                         />
-                        <button className='btn btn-primary ms-3 btn-lg' onClick={handleSubmit}>
-                            ADD
-                        </button>
                     </div>
-                </form>
-
-                {/* Bộ lọc trạng thái task */}
-                <div className="btn-group mb-4">
-                    <button className={`btn btn-${filter === 'ALL' ? 'primary' : 'outline-primary'}`} 
-                        onClick={() => setFilter('ALL')}
-                    >
-                        ALL
-                    </button>
-                    <button className={`btn btn-${filter === 'active' ? 'primary' : 'outline-primary'}`} 
-                        onClick={() => setFilter('active')}
-                    >
-                        ACTIVE       
-                    </button>
-                    <button className={`btn btn-${filter === 'completed' ? 'primary' : 'outline-primary'}`} 
-                        onClick={() => setFilter('completed')}
-                    >
-                        COMPLETED
-                    </button>
                 </div>
-
-                {/* Component TodoList sẽ hiển thị danh sách tasks đã được lọc */}
-                <TodoList
-                    tasks={filteredTasks}
-                    onUpdate={handleUpdate}
-                    onRemove={handleRemove}
-                    onToggleStatus={handleToggleStatus}
-                />
             </div>
         </div>
     );

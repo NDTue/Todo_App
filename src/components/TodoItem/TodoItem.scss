@@ -8,3 +8,34 @@
 .task-input__editing:focus{
     box-shadow: none !important;
 }
+
+.task-item {
+    transition: all 0.3s ease;
+    
+    .task-text {
+        word-break: break-word;
+        transition: all 0.2s ease;
+        
+        &.done {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-style: italic;
+        }
+    }
+    
+    .task-input__editing:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: #0d6efd !important;
+    }
+}
+
+/* Custom CSS nếu cần thiết cho các màn hình nhỏ hơn */
+@media (max-width: 576px) {
+    .task-item {
+        .btn {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+    }
+}
